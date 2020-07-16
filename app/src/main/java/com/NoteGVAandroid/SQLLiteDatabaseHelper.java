@@ -16,7 +16,16 @@ public class SQLLiteDatabaseHelper extends SQLiteOpenHelper {
             CATEGORY_TABLE_NAME + "(" +
             CATEGORY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
             CATEGORY_NAME + " TEXT NOT NULL );";
+//Notes Table Name
+    public static final String NOTES_TABLE_NAME = "NOTES";
 
+    public static final String NOTES_ID = "notes_id";
+    public static final String TITLE = "title";
+    public static final String DATE = "date";
+    public static final String DESCRIPTION = "description";
+    public static final String AUDIO = "audio";
+    public static final String LOCATION = "location";
+    public static final String NOTES_CATEGORY_ID = "category_id";
    //Create Notes Table Query
     private static final String CREATE_NOTES_TABLE = "create table " +
             NOTES_TABLE_NAME + " (" +
