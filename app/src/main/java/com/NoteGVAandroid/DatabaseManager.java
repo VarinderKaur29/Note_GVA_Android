@@ -155,4 +155,22 @@ public class DatabaseManager {
                 });
 
     }
+    
+     public void updateNote(int note_id, String title, String date, String text, String audio, String location, int category_id) {
+
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(sqlHelper.NOTES_ID, note_id);
+        contentValues.put(sqlHelper.TITLE, title);
+        contentValues.put(sqlHelper.DATE, date);
+        contentValues.put(sqlHelper.DESCRIPTION, text);
+
+        contentValues.put(sqlHelper.AUDIO, audio);
+        contentValues.put(sqlHelper.LOCATION, location);
+        contentValues.put(sqlHelper.NOTES_CATEGORY_ID, category_id);
+
+        database.update(sqlHelper.NOTES_TABLE_NAME, contentValues, "NOTES_ID = ?", new String[]{
+                String.valueOf(note_id)
+        });
+
+    }
 }
