@@ -139,4 +139,20 @@ public class DatabaseManager {
                 });
 
     }
+    
+     public void deleteCategory(int category_id) {
+        database.delete(sqlHelper.NOTES_TABLE_IMAGES, " CATEGORY_ID = ?",
+                new String[]{
+                        String.valueOf(category_id)
+                });
+        database.delete(sqlHelper.NOTES_TABLE_NAME, " CATEGORY_ID = ?",
+                new String[]{
+                        String.valueOf(category_id)
+                });
+        database.delete(sqlHelper.CATEGORY_TABLE_NAME, " CATEGORY_ID = ?",
+                new String[]{
+                        String.valueOf(category_id)
+                });
+
+    }
 }
