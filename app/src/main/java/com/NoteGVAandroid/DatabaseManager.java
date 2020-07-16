@@ -184,4 +184,27 @@ public class DatabaseManager {
         database.insert(sqlHelper.NOTES_TABLE_IMAGES, null, contentValues);
 
     }
+    
+      public List<ImageModel> getImages(int note_id, int category_id) {
+        List<ImageModel> imageModels = new ArrayList<>();
+
+        Cursor c = database.rawQuery("SELECT * FROM " + sqlHelper.NOTES_TABLE_IMAGES + " WHERE " + sqlHelper.NOTES_CATEGORY_ID + " = " + category_id + " and " + sqlHelper.NOTES_IMAGE_ID + "=" + note_id, null);
+
+        if (c.moveToFirst()) {
+
+            do {
+
+                ImageModel imageModel = new ImageModel();
+                imageModel.IMAGE = c.getString(0);
+
+                imageModels.add(imageModel);
+
+            } while (c.moveToNext());
+
+        }
+
+        return imageModels;
+
+    }
+
 }
