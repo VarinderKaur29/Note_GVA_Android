@@ -83,4 +83,26 @@ public class DatabaseManager {
         }
         return noteModel;   
     }
+    
+     public List<NoteModel> searchNotes(int subject_id, String search) {
+        List<NoteModel> noteModels = new ArrayList<>();
+
+        Cursor c = database.rawQuery("SELECT * FROM " + sqlHelper.NOTES_TABLE_NAME + " WHERE " + sqlHelper.NOTES_CATEGORY_ID + " = " + subject_id + " and ( " + sqlHelper.TITLE + " LIKE '%" + search + "%' or " + sqlHelper.DESCRIPTION + " LIKE '%" + search + "%' )", null);
+        if (c.moveToFirst()) {
+
+            do {
+                NoteModel noteModel = new NoteModel();
+                noteModel.NOTE_ID = c.getInt(0);
+                noteModel.TITLE = c.getString(1);
+                noteModel.DATE = c.getString(2);
+                noteModel.DESCRIPTION = c.getString(3);
+                noteModel.AUDIO = c.getString(4);
+                noteModel.LOCATION = c.getString(5);
+                noteModel.CATEGORY_ID = c.getInt(6);
+                noteModels.add(noteModel);
+
+            } while (c.moveToNext());
+        }
+        return noteModels;
+    }
 }
