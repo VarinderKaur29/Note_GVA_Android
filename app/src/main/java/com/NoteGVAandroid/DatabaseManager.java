@@ -105,4 +105,24 @@ public class DatabaseManager {
         }
         return noteModels;
     }
+    
+     public NoteModel getSingleNote(int note_id) {
+        Cursor c = database.rawQuery("SELECT * FROM " + sqlHelper.NOTES_TABLE_NAME + " WHERE " + sqlHelper.NOTES_ID + " = '" + note_id + "'", null);
+
+        if (c.moveToFirst()) {
+            NoteModel noteModel = new NoteModel();
+
+            noteModel.NOTE_ID = c.getInt(0);
+            noteModel.TITLE = c.getString(1);
+            noteModel.DATE = c.getString(2);
+            noteModel.DESCRIPTION = c.getString(3);
+            noteModel.AUDIO = c.getString(4);
+            noteModel.LOCATION = c.getString(5);
+            noteModel.CATEGORY_ID = c.getInt(6);
+            return noteModel;
+        }
+
+        return null;
+
+    }
 }
