@@ -35,6 +35,31 @@ public class SQLLiteDatabaseHelper extends SQLiteOpenHelper {
     public static final String NOTES_IMAGE_ID = "notes_id";
     public static final String IMAGE_CATEGORY_ID = "category_id";
 
-  
-  
+   private static final String CREATE_IMAGE_TABLE = "create table " +
+            NOTES_TABLE_IMAGES + " ( " +
+            IMAGE + " text , " +
+            NOTES_IMAGE_ID + " INTEGER NOT NULL ," +
+            IMAGE_CATEGORY_ID + " INTEGER NOT NULL ) ; ";
+
+    public SQLLiteDatabaseHelper(Context context) {
+        super(context, DATABASE_NAME, null, DB_VERSION);
+    }
+
+ @Override
+    public void onCreate(android.database.sqlite.SQLiteDatabase sqLiteDatabase) {
+
+        sqLiteDatabase.execSQL(CREATE_CATEGORY_TABLE);
+        sqLiteDatabase.execSQL(CREATE_NOTES_TABLE);
+        sqLiteDatabase.execSQL(CREATE_IMAGE_TABLE);
+
+    }
+
+    @Override
+    public void onUpgrade(android.database.sqlite.SQLiteDatabase sqLiteDatabase, int i, int i1) {
+
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + CATEGORY_TABLE_NAME);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + NOTES_TABLE_NAME);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + NOTES_TABLE_IMAGES);
+        onCreate(sqLiteDatabase);
+    }  
 }
