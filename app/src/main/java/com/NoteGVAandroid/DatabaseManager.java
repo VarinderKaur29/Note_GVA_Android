@@ -206,5 +206,27 @@ public class DatabaseManager {
         return imageModels;
 
     }
+    
+     public List<NoteModel> getSortedNotes(int category_id, String sortOrder) {
+        List<NoteModel> noteModels = new ArrayList<>();
+        Cursor c = database.rawQuery("SELECT * FROM " + sqlHelper.NOTES_TABLE_NAME + " WHERE " + sqlHelper.NOTES_CATEGORY_ID + " = " + category_id + " order by " + sortOrder, null);
+        if (c.moveToFirst()) {
+
+            do {
+
+                NoteModel noteModel = new NoteModel();
+                noteModel.NOTE_ID = c.getInt(0);
+                noteModel.TITLE = c.getString(1);
+                noteModel.DATE = c.getString(2);
+                noteModel.DESCRIPTION = c.getString(3);
+                noteModel.AUDIO = c.getString(4);
+                noteModel.LOCATION = c.getString(5);
+                noteModel.CATEGORY_ID = c.getInt(6);
+
+                noteModels.add(noteModel);
+            } while (c.moveToNext());
+        }
+        return noteModels;
+    }
 
 }
