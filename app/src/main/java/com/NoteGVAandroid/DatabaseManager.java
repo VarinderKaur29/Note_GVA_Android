@@ -173,4 +173,15 @@ public class DatabaseManager {
         });
 
     }
+    
+    public void insertImage(String image, int notes_id, int category_id) {
+
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(sqlHelper.IMAGE, image);
+        contentValues.put(sqlHelper.NOTES_ID, notes_id);
+        contentValues.put(sqlHelper.NOTES_CATEGORY_ID, category_id);
+
+        database.insert(sqlHelper.NOTES_TABLE_IMAGES, null, contentValues);
+
+    }
 }
